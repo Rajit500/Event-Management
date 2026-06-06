@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">ITS<span>CPSEvents</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="announcements.html">News</a></li>
+            <li><a href="my-events.html">My Events</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+        <button class="dark-toggle" id="darkToggle">🌙</button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <h2 class="page-title">📋 My Events</h2>
+        <p class="page-subtitle">Events you have registered for</p>
+
+        <!-- SEARCH BY ROLL NUMBER -->
+        <div class="card" style="padding:25px; margin-bottom:25px;">
+            <p style="font-size:14px; font-weight:500; 
+                      margin-bottom:10px; color:var(--text);">
+                Enter your Roll Number to see your registered events
+            </p>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="rollInput"
+                    placeholder="Enter your roll number"
+                    style="flex:1; padding:10px 15px; border:2px solid #e0e0e0;
+                           border-radius:8px; font-size:14px;
+                           font-family:'Poppins',sans-serif;
+                           background:var(--card-bg); color:var(--text);">
+                <button type="button" class="btn btn-primary"
+                    onclick="searchMyEvents()">
+                    Search 🔍
+                </button>
+            </div>
+        </div>
+
+        <!-- MY EVENTS LIST -->
+        <div id="myEventsList">
+            <!-- Loaded by JS -->
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Made with ❤️ for College Events Management</p>
+    </footer>
+
+    <script src="js/events.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/myevents.js"></script>
+    <script src="js/chatbot.js"></script> 
+
+</body>
+</html>

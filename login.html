@@ -1,0 +1,253 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ITS CPS Events</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-logo {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: #4F46E5;
+    margin-bottom: 8px;
+}
+
+        .auth-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 25px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-light);
+        }
+
+        .auth-tab.active {
+            background: white;
+            color: #4F46E5;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .error-msg {
+            background: #FFF1F2;
+            color: #BE123C;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-msg {
+            background: #F0FDF4;
+            color: #15803D;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .divider {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 13px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .admin-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .admin-link a {
+            color: #4F46E5;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+
+            <!-- LOGO -->
+            <div class="auth-logo">ITS CPS Events</div>
+            <p class="auth-subtitle">Your college event management platform</p>
+
+            <!-- TABS -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" 
+                    onclick="showAuthTab('login', this)">
+                    Login
+                </button>
+                <button class="auth-tab" 
+                    onclick="showAuthTab('signup', this)">
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <div class="auth-form active" id="loginForm">
+                <div id="loginError" class="error-msg"></div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" 
+                        placeholder="Enter your college email">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" 
+                        placeholder="Enter your password">
+                </div>
+
+                <button type="button" class="btn btn-primary"
+                    style="width:100%;" onclick="loginStudent()">
+                    Login 🚀
+                </button>
+
+                <div class="admin-link">
+                    Are you a teacher? 
+                    <a href="admin-login.html">Admin Login</a>
+                </div>
+            </div>
+
+            <!-- SIGNUP FORM -->
+            <div class="auth-form" id="signupForm">
+                <div id="signupError" class="error-msg"></div>
+                <div id="signupSuccess" class="success-msg"></div>
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" 
+                        placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Roll Number</label>
+                    <input type="text" id="signupRoll" 
+                        placeholder="Enter your roll number">
+                </div>
+
+                <div class="form-group">
+                    <label>Branch</label>
+                    <select id="signupBranch">
+                        <option value="">Select branch</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BBA">BBA</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="Civil">Civil</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Year</label>
+                    <select id="signupYear">
+                        <option value="">Select year</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="signupPhone" 
+                        placeholder="Enter 10 digit phone number"
+                        maxlength="10">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" 
+                        placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" 
+                        placeholder="Minimum 6 characters">
+                </div>
+
+                <button type="button" class="btn btn-primary"
+                    style="width:100%;" onclick="signupStudent()">
+                    Create Account ✨
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script type="module" src="js/login.js"></script>
+
+</body>
+</html>

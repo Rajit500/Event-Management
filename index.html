@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Events ITS CPS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">ITS<span>CPS</span><span>Events</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="announcements.html">News</a></li>
+            <li><a href="my-events.html">My Events</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+        <button class="dark-toggle" id="darkToggle">🌙</button>
+    </nav>
+
+    <!-- HERO SECTION -->
+<div class="hero">
+    <h1>Welcome to ITS CPS Events 🎉</h1>
+    <p>Discover, Register and Track all college events in one place</p>
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <span class="number" id="heroEvents">0</span>
+            <span class="label">Events</span>
+        </div>
+        <div class="hero-stat">
+            <span class="number" id="heroRegistrations">0</span>
+            <span class="label">Registrations</span>
+        </div>
+        <div class="hero-stat">
+            <span class="number" id="heroCategories">3</span>
+            <span class="label">Categories</span>
+        </div>
+    </div>
+</div>
+
+     <div class="container">
+    <h2 class="page-title">All Events</h2>
+    <p class="page-subtitle">Browse and register for events happening in your college</p>
+
+    <div class="search-filter">
+        <input type="text" id="searchInput" placeholder="🔍 Search events...">
+         <button type="button" class="filter-btn" onclick="filterEvents('All')">All</button>
+         <button type="button" class="filter-btn" onclick="filterEvents('Technical')">Technical</button>
+         <button type="button" class="filter-btn" onclick="filterEvents('Cultural')">Cultural</button>
+         <button type="button" class="filter-btn" onclick="filterEvents('Sports')">Sports</button>
+         <button type="button" class="filter-btn" onclick="filterByType('intra')">🏫 Intra College</button>
+         <button type="button" class="filter-btn" onclick="filterByType('inter')">🌐 Inter College</button>
+    </div>
+
+    <div class="events-grid" id="eventsGrid"></div>
+</div>
+
+    <footer>
+        <p>Made with ❤️ for ITS College Events Management </p>
+    </footer>
+
+<script src="js/events.js"></script>
+<script src="js/app.js"></script>
+<script type="module" src="js/firestore-events.js"></script>
+<script src="js/home.js"></script>
+<script src="js/chatbot.js"></script>
+
+</body>
+</html>

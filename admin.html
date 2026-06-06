@@ -1,0 +1,321 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: none;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">ITS<span>CPSEvents</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="announcements.html">News</a></li>
+            <li><a href="my-events.html">My Events</a></li>
+            <li><a href="bookmarks.html">Bookmarks</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+        <button class="dark-toggle" id="darkToggle">🌙</button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <h2 class="page-title">🛠️ Admin Panel</h2>
+        <p class="page-subtitle">Manage events, announcements and registrations</p>
+  
+        <!-- STATS -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalEvents">0</div>
+                <div class="stat-label">Total Events</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalRegistrations">0</div>
+                <div class="stat-label">Total Registrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalAnnouncements">0</div>
+                <div class="stat-label">Announcements</div>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="admin-tabs">
+            <button type="button" class="tab-btn active"
+                onclick="showTab('addEvent', this)">➕ Add Event</button>
+            <button type="button" class="tab-btn"
+                onclick="showTab('manageEvents', this)">📋 Manage Events</button>
+            <button type="button" class="tab-btn"
+                onclick="showTab('addAnnouncement', this)">📢 Add Announcement</button>
+            <button type="button" class="tab-btn"
+                onclick="showTab('viewRegistrations', this)">👥 Registrations</button>
+            <button type="button" class="tab-btn" onclick="showTab('manageAnnouncements', this)"> 🗑️ Manage Announcements  </button>
+        </div>
+
+        
+
+        <div class="tab-content active" id="addEvent">
+    <div class="card" style="padding:30px;">
+        <h3 style="font-size:18px; font-weight:600; margin-bottom:20px;">
+            ➕ Add New Event
+        </h3>
+
+        <div class="form-group">
+            <label>Event Title</label>
+            <input type="text" id="newTitle" placeholder="Enter event title">
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <select id="newCategory">
+                <option value="">Select category</option>
+                <option value="Technical">Technical</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Sports">Sports</option>
+            </select>
+        </div>
+
+        <!-- NEW — INTRA/INTER -->
+        <div class="form-group">
+            <label>Event Type</label>
+            <select id="newEventType">
+                <option value="">Select event type</option>
+                <option value="intra">🏫 Intra College</option>
+                <option value="inter">🌐 Inter College</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="newDescription" rows="4"
+                placeholder="Enter event description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Event Date</label>
+            <input type="date" id="newDate">
+        </div>
+
+        <div class="form-group">
+            <label>Registration Deadline</label>
+            <input type="date" id="newDeadline">
+        </div>
+
+        <div class="form-group">
+            <label>Event Time</label>
+            <input type="time" id="newTime">
+        </div>
+
+        <div class="form-group">
+            <label>Venue</label>
+            <input type="text" id="newVenue" placeholder="Enter venue">
+        </div>
+
+        <div class="form-group">
+            <label>Total Seats</label>
+            <input type="number" id="newSeats" placeholder="Enter total seats">
+        </div>
+
+        <div class="form-group">
+            <label>Organizer</label>
+            <input type="text" id="newOrganizer" placeholder="Enter organizer name">
+        </div>
+
+        <!-- NEW — PRIZE -->
+        <div class="form-group">
+            <label>Prize / Certificate</label>
+            <input type="text" id="newPrize" 
+                placeholder="e.g. Cash Prize 5000, Certificate of Participation">
+        </div>
+
+        <!-- NEW — CONTACT -->
+        <div class="form-group">
+            <label>Contact Person</label>
+            <input type="text" id="newContact" 
+                placeholder="Enter contact person name and number">
+        </div>
+
+        <!-- NEW — IMAGE -->
+        <div class="form-group">
+            <label>Event Image URL (optional)</label>
+            <input type="text" id="newImage"
+                placeholder="Paste image URL or leave empty for auto">
+            <p style="font-size:11px; color:var(--text-light); margin-top:5px;">
+                💡 Leave empty for automatic image.
+            </p>
+        </div>
+
+        <p id="eventError" style="color:red; font-size:13px;
+            margin-bottom:15px; display:none;">
+            Please fill all required fields!
+        </p>
+
+        <p id="eventSuccess" style="color:green; font-size:13px;
+            margin-bottom:15px; display:none;">
+            Event added successfully! ✅
+        </p>
+
+        <button type="button" class="btn btn-primary"
+            style="width:100%;" onclick="addEvent()">
+            Add Event ➕
+        </button>
+    </div>
+</div>
+
+        <!-- TAB 2 — MANAGE EVENTS -->
+        <div class="tab-content" id="manageEvents">
+            <div id="manageEventsList">
+                <!-- Loaded by JS -->
+            </div>
+        </div>
+
+        <!-- TAB 3 — ADD ANNOUNCEMENT -->
+        <div class="tab-content" id="addAnnouncement">
+            <div class="card" style="padding:30px;">
+                <h3 style="font-size:18px; font-weight:600; margin-bottom:20px;">
+                    📢 Post New Announcement
+              </h3>
+
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="annTitle"
+                        placeholder="Enter announcement title">
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="annCategory">
+                        <option value="">Select category</option>
+                        <option value="Important">Important</option>
+                        <option value="Notice">Notice</option>
+                        <option value="News">News</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea id="annContent" rows="4"
+                        placeholder="Enter announcement content"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Posted By</label>
+                    <input type="text" id="annPostedBy"
+                        placeholder="Enter your name or department">
+                </div>
+
+                <p id="annError" style="color:red; font-size:13px;
+                    margin-bottom:15px; display:none;">
+                    Please fill all fields!
+                </p>
+
+                <p id="annSuccess" style="color:green; font-size:13px;
+                    margin-bottom:15px; display:none;">
+                    Announcement posted successfully! ✅
+                </p>
+
+                <button type="button" class="btn btn-primary"
+                    style="width:100%;" onclick="addAnnouncement()">
+                    Post Announcement 📢
+                </button>
+                <button type="button" class="tab-btn" onclick="showTab('manageAnnouncements', this)">🗑️ Manage Announcements </button>
+            </div>
+        </div>
+
+        
+
+        <!-- TAB 4 — VIEW REGISTRATIONS -->
+        <div class="tab-content" id="viewRegistrations">
+            <div id="registrationsList">
+                <!-- Loaded by JS -->
+            </div>
+        </div> 
+
+        <!-- TAB 5 — MANAGE ANNOUNCEMENTS -->
+<div class="tab-content" id="manageAnnouncements">
+    <div id="manageAnnouncementsList">
+        <!-- Loaded by JS -->
+    </div>
+</div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Made with ❤️ for College Events Management</p>
+    </footer>
+
+     <script src="js/events.js"></script>
+    <script src="js/app.js"></script>
+    <script type="module" src="js/firestore-events.js"></script>
+    <script src="js/admin.js"></script>
+     <script src="js/chatbot.js"></script>
+
+</body>
+</html>   
